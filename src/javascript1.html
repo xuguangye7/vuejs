@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //js中的分号可加可不加
+    // 文档输出内容
+        // document.write("我是div标签")
+        // document.write("<h1>我是标题</h1>")
+    // 文档输入内容
+        // prompt("请输入你的年龄")
+
+    // 变量
+        let age = 20
+        age = 21
+
+        // let uname = prompt("请输入姓名");
+        // let uage = prompt("请输入年龄");
+        // let gender = prompt("请输入性别");
+        // document.write(uname)
+        // document.write(uage)
+        // document.write(gender)
+
+    // let 和 var 的区别
+        // let 要好一些，var有一些缺陷
+            // 1.可以先使用，在声明
+            num = 10;
+            console.log(num);
+            var num;//是不会报错的
+            //2.同一变量可以多次声明
+            var num = 10
+            var num = 12
+
+    //常量
+        //用const，当某个值不会发生改变的时候用
+        // const PI =3.14;
+        // console.log(PI);
+        // PI = 3.15;
+        // console.log(PI); //1.这样就会报错，因为PI是一个常量不会发生改变
+        //2.用const声明的变量必须要对其进行赋值，  const pi  (×)
+
+    //模板字符串
+        let age1 = 20
+        document.write(`我今年${age1}岁了`)//必须使用反引号，使用${}即可实现l
+
+    //Boolean  和  undefined   和   unll
+        let num2
+        console.log(num2);
+
+        let obj = null;
+        console.log(obj);      //undefined 表示没有赋值，null表示赋值了，值为空
+        //NaN 表示不是一个数字
+        console.log(undefined + 1);    //NaN
+        console.log(null + 1);        //1
+    
+    //数据类型的检测typeof
+        let num3 = 40
+        console.log(typeof num3);
+        let str = 'hello'
+        console.log(typeof str);
+
+    //数据类型的转换
+        //由prompt 和 input  输入的内容会默认为字符串类型,进行相加需要数据类型的转换
+        
+        // let num5 = Number(prompt("输入第一个数"));
+        // let num1 = Number(prompt("输入第二个数"));
+        // alert(num5+num1)
+
+        let num5 = +prompt("输入第一个数");//用一个加号就可以进行数据类型的转换了
+        let num1 = +prompt("输入第二个数");
+        alert(`两个数的和为${num5+num1}`)
+
+    //一元运算符
+        let i = 1;
+        console.log(i++ + ++i +i);
+
+    //比较运算符
+        console.log(2 == '2');
+        console.log(2 === '2');
+        console.log(undefined == null);
+        console.log(undefined === null);
+        console.log(NaN === NaN); //NaN不等于任何人，包括他自己
+
+        console.log(2!='2');
+        console.log(2!=='2');
+
+    //判断一个数能否被整除的例子
+        let c = +prompt('请输入你的数字');
+        alert(c%4==0 && c%100!=0)
+
+    //逻辑运算符的优先级顺序
+        //  ! > && > ||
+    </script>
+</body>
+</html>

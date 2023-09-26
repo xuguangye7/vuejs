@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.1</title>
+    <link rel="stylesheet" href="../src/css/vue.css">
+    <style>
+      /* .active {
+        border: 1px solid red;
+      } */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        {{ message }}
+        <h2> {{school.name}} {{school.mobile}}</h2>
+        <h2>{{ school }}学习</h2>  
+              <!-- 会将school中内容全部打印出 -->
+        <ul>
+          <li>{{campus}}</li>
+            <!-- 也是会将数组全部内容打印 -->
+          <li>{{campus[0]}}</li>
+          <li>{{campus[2]}}</li>
+        </ul>
+
+    <!-- vue指令 -->
+        <h2 v-text = "school.name">学习</h2>
+            <!-- 有v-text的内容，会将h2中的内容全部替换掉，h2之内的东西不显示 -->
+        <h2>{{school.name}}学习</h2>
+            <!-- 可以采用差 值表达式实现 -->
+        <h2 v-text = "school.name +'!'"></h2>     
+        <h2>{{message + "!"}}</h2>
+            <!-- //字符串的拼接 -->
+
+        <p v-html ="content"></p>
+        
+    <!-- v-on是为元素绑定事件 -->
+        <input type="button" value="v-on指令" v-on:click="doIt">
+        <input type="button" value="v-on指令" @click="doIt">
+                    <!-- @符号可以代替，简写v-on指令 -->
+        <input type="button" value="双击点击" @dblclick="doIt">
+        <h2 @click="changeFood">{{food}}</h2>
+
+        <div>
+          <button @click="sub">
+            -
+          </button>
+          <span>{{num}}</span>
+          <button @click="add">
+            +
+          </button>
+        </div>
+
+
+        <input type="button" value="切换显示状态" @click="changeIsShow">
+        <img v-show="isShow" src="./images/201809141417401888.jpg"  alt="">
+      
+        
+        <input type="button" value="累加年龄" @click="addAge">
+        <img v-show="age>=18" src="./images/201809141417401888.jpg"  alt="">
+
+
+        <input type="button" value="v-if切换" @click="toggleIsShow">
+        <p v-if="ifShow">v-if切换显示状态</p>
+        <p v-show="ifShow">v-show切换显示状态</p>
+        <!-- 两者的区别，v-if是修改的DOM元素，直接去掉整个p标签，
+          而v-show是修改style的display:none，更改样式。
+          所以频繁切换的用v-show，反之用v-if;
+          频繁的修改DOM树对性能的消耗较大-->
+        <input type="button" value="降低温度" @click="di">
+        <input type="button" value="增加温度" @click="jia">
+        <h2 v-if="temperature>=20">热死了！</h2>
+        <!-- v-if和v-show 都可以根据表达式的真假来切换元素的显示状态 -->
+
+    <!-- v-bind 指令就是设计元素的属性；比如 title class src -->
+        <img v-bind:src="imgSrc" alt="">
+        <br>
+        <img :src="imgSrc" alt="" :title="imgTitle+'!!!'"  :class="isActive?'active':''" @click="toggleActive">   
+        <!-- v-bind可以省略 -->
+        <!-- title属性就是鼠标悬停可以显示图片的title -->
+        <br>
+        <img :src="imgSrc" alt="" :title="imgTitle+'!!!'"  :class="{active:isActive}" @click="toggleActive">  
+        
+
+        <br>
+        <img :src="imgArr[index]" alt="">
+        <input type="button" value="<" v-show="index!=0" @click="prev">
+        <input type="button" value=">" v-show="index<imgArr.length-1" @click="next">
+
+
+    <!-- v-for 根据数据生成列表结构 -->
+          <!-- 语法：(item,index) in 数组 -->
+          <!-- item代表每一项，index代表索引 -->
+          <input type="button" value="加菜" @click="jiacai">
+          <input type="button" value="减菜" @click="jiancai">
+          <ul>
+            <li v-for="(item,index) in arr">
+              {{index+1}}黑马程序员：{{item}}
+            </li>
+          </ul>
+          <h2 v-for="item in vegetables" v-bind:title="item.name">
+            {{item.name}}
+          </h2>
+        
+          <input type="button" value="点击" @click="dooIt(666,'laotie')">
+          <input type="text" @keyup.enter="sayHi">
+          <!-- 时间修饰符，按下回车键可以执行后面的函数 -->
+
+      <!-- v-model -->
+          <input type="button" value="修改message" @click="setM">
+          <input type="text" v-model="message" @keyup.enter="getM">
+          <h2>{{ message }}</h2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var app = new Vue ({
+            el :"#app",
+            data:{
+                message :"你好", 
+                school:{
+                  name:"长安大学",
+                  mobile:"123768951"
+                },
+                campus:["北京","西安","上海"],
+                content:"<a href='http://www.itheima.com'>黑马程序员</a>",
+                food:"西红柿炒蛋",
+                num:1,
+                isShow:false,
+                age:17,
+                ifShow:false,
+                temperature:20,
+                imgSrc:"http://www.itheima.com/images/logo.png",
+                imgTitle:"黑马程序猿",
+                isActive:false,
+
+                imgArr:["./images/201809141417401888.jpg","./images/大话西游.jpg","./images/花木兰.jpg"],
+                index:0,
+                arr:["北京","上海","广州","深圳"],
+                vegetables:[{name:"一二三四五"},{name:"五四三二一"}],
+            },
+            methods:{
+              doIt:function(){
+                alert("做It");
+              },
+              changeFood:function(){
+                this.food+="好好吃！"
+              },
+              add:function(){
+                // console.log('add')
+                if(this.num<10){
+                  this.num++;
+                }else{
+                  alert("别点了，最大了！")
+                }
+              },
+              sub:function(){
+                // console.log('sub')
+                if(this.num>0){
+                  this.num--;
+                }else{
+                  alert("别点了，最小了！")
+                }
+              },
+              changeIsShow:function(){
+                this.isShow=!this.isShow
+              },
+              addAge:function(){
+                this.age++;
+              },
+              toggleIsShow:function(){
+                this.ifShow=!this.ifShow;
+              },
+              di:function(){
+                this.temperature--;
+              },
+              jia:function(){
+                this.temperature++;
+              },
+              toggleActive:function(){
+                this.isActive=!this.isActive
+              },
+              prev:function(){
+                this.index--
+              },
+              next:function(){
+                this.index++
+              },
+              jiacai:function(){
+                this.vegetables.push({ name:"六七八" })
+              },
+              jiancai:function(){
+                this.vegetables.shift();
+              },
+              dooIt:function(p1,p2){
+                console.log("做it");
+                console.log(p1);
+                console.log(p2);
+              },
+              sayHi:function(){
+                alert("吃了吗？");
+              },
+              setM:function(){
+                this.message = "好好学习！";
+              },
+              getM:function(){
+                alert(this.message)
+              }
+            }
+        })
+    </script>
+  </body>
+</html>
