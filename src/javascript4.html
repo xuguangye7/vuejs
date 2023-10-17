@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>学生信息</h1>
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>家乡</th>
+            </tr>
+        </table>
+    </div>
+    <script>
+        //对象：也是一种数据类型，（数组也是一种数据类型）
+            //数组内部是有序的数据集合
+            //对象内部是无序的数据集合
+
+        //对象的使用
+            //声明
+                    // 1.   let 对象名 = {这里面有属性和方法；属性就是信息，方法就是有什么功能：就是函数了}            
+                    // 2.   let  对象名 = new Object()
+                        let obj = {
+                            uname:'pink',
+                            age:'18',
+                            gender:'男',
+                            'goods-name':'123'  //这种情况只能用查询的第二种方式
+                        }
+                        console.log(obj);
+                        console.log(typeof obj);  // object 就是对象数据类型
+            //使用（增删改查）
+                    //1.查：     
+                        //(1)对象名.属性名
+                        console.log(obj.uname);
+                        //(2)对象名['属性名']
+                        console.log(obj['uname']);
+                        console.log(obj['goods-name']);
+                    //2.改       对象名.属性名='新值'
+                        obj.age='20'
+                        console.log(obj.age);
+                    //3.增加     对象名.属性名='新值'
+                        obj.grade = 80   //可以添加信息
+                        console.log(obj);
+                    //4.删除    //一般情况下不删除
+                        delete obj.age
+                        console.log(obj);
+            //对象中的方法，就是函数
+                    let obj1 = {
+                        uname:'刘德华',
+                        //方法
+                        song: function (x,y){
+                            console.log(x+y);
+                            console.log('大雨');
+                        }
+                    }
+                    //调用
+                    obj1.song(1,2)
+            //遍历对象
+                    for(let k in obj) {
+                        console.log(k);  //此时可以得到属性名，但是是加了引号的   'uname'
+                        console.log(obj[k]);   //所以恰恰正好使用这种查询方式，不能使用obj.k
+                    } 
+            //遍历数组对象
+                    let students = [
+                        {name:'小明',age:18,gender:'男',home:'河南省'},
+                        {name:'小红',age:12,gender:'女',home:'河北省'},
+                        {name:'小刚',age:20,gender:'男',home:'陕西省'},
+                        {name:'小丽',age:16,gender:'女',home:'广东省'},
+                    ]
+                    for (let i = 0; i < students.length; i++) {
+                        // console.log(i);  //就是打印数组的下标
+                        console.log(students[i].name);
+                    }
+                    for (let i = 0; i < students.length; i++) {
+                        document.write(`
+                        <table>
+                            <tr>
+                                <th>${i+1}</th>
+                                <th>${students[i].name}</th>
+                                <th>${students[i].age}</th>
+                                <th>${students[i].gender}</th>
+                                <th>${students[i].home}</th>
+                            </tr>
+                        </table>
+                        `)
+                    }
+            //内置对象：可以直接调用的        
+                    //Math也是一个对象，有属性，也有方法
+                        //属性
+                        console.log(Math.PI)
+                        //方法
+                        console.log(Math.ceil(1.1));//向上取整
+                        console.log(Math.floor(1.1));//向下取整
+                        console.log(Math.round(1.1));//四舍五入
+                        console.log(Math.round(1.5));//四舍五入
+                        console.log(Math.max(1,5,4,2,3));
+                        console.log(Math.min(1,5,4,2,3));
+                        console.log(Math.abs(-1));//取绝对值
+
+                        console.log(Math.random());//生成一个[0,1)的随机数
+
+                        //0-10之间的随机数
+                        console.log(Math.floor(Math.random()*11));//因为1是取不到的，如果×10，10也是取不到的，所以乘的数要比去的数大一个
+                        let arr = ['red','blue','pink','green']  //这里要取的数是[0,3),所以要乘以4，恰恰正好是数组的长度
+                        console.log(arr[Math.floor(Math.random()*arr.length)]);
+
+                        //5-10之间的随机数
+                        console.log(Math.floor(Math.random()*6)+5);
+
+                        //n-m之间的随机数
+                        // Math.floor(Math.random()*(m-n+1))+n
+
+                        //封装一个函数
+                        function getRandom(n,m) {
+                            return Math.floor(Math.random()*(m-n+1))+n
+                        }
+                        console.log(getRandom(10,20));
+                //点名案例，但不重复出现
+                        let arr1 = ['刘备','关羽','张飞','马超','黄忠']
+                        let random = Math.floor(Math.random()*arr1.length)
+                        document.write(arr1[random])
+                        arr.splice(random,1)
+
+                
+
+
+    </script>
+</body>
+</html>

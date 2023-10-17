@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+    <script>
+        //操作元素样式属性
+                //1.通过style属性操作CSS
+                    const box = document.querySelector('.box')
+                    box.style.width = '300px'
+                    box.style.backgroundColor = 'hotpink'  //属性中具有-的时候采取小驼峰命名
+                    box.style.border = '2px solid blue'
+                //2.操作类名className
+                //3.通过classList
+    </script>
+</body>
+</html>

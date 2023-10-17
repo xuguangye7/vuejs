@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 300px;
+            border: 5px solid pink;
+        }
+        /* div {
+            width: 20px;
+            background-color: pink;
+        } */
+    </style>
+</head>
+<body>
+    <script>
+        let arr = []
+        for (let i = 0; i < 4; i++) {
+            // arr[i] = +prompt(`请输入第${i+1}个数字`)
+            arr.push(prompt(`请输入第${i+1}个数字`))
+        }
+        // console.log(arr);
+        document.write(`<div class="box">`)
+            for (let i = 0; i < arr.length; i++) {
+                document.write(`
+                    <div style = "width:${arr[i]}px;height:50px;background-color: pink;">
+                        ${arr[i]} 
+                    </div>
+                `)
+            }
+        document.write(`</div>`)
+
+    </script>
+</body>
+</html>

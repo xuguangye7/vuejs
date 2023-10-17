@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">123</div>  
+    <div class="box">abc</div>
+    <p id="nav">导航栏</p>
+    <ul>
+        <li>测试1</li>
+        <li>测试2</li>
+        <li>测试3</li>
+    </ul>
+    <ul class="dis">
+        <li>首页</li>
+        <li>内容</li>
+        <li>个人</li>
+    </ul>
+    <div class="box2">我是文字内容</div>
+    <img src="./images/大话西游.jpg" alt="">
+    <script>
+        //获取DOM 元素
+            //用css选择器的方式来获取DOM对象
+                //1.获取匹配的第一个元素:
+                    const box = document.querySelector('div')   //只能获取到123
+                    const box1 = document.querySelector('.box')
+                    const nav = document.querySelector('#nav')   
+                    nav.style.color = 'red'    //可以对其进行直接修改
+                    const nav1 = document.querySelector('p')   
+                    console.log(box1);
+                    //获取第一个小li
+                    const li = document.querySelector('ul li:first-child')
+                    console.log(li);
+                //2.获取全部的li
+                    const lis = document.querySelectorAll('ul li')
+                    console.log(lis);     //这个获取的多个就不可以对其直接的修改，只能通过遍历的方式
+                    const dis = document.querySelectorAll('.dis li')
+                    console.log(dis);    //获取多个元素得到的结果是一个伪数组，不具有数组的功能，但是有长度与索引号，就可以用for循环进行遍历
+                    for (let i = 0; i < dis.length; i++) {
+                        dis[i].style.color = 'red'
+                    }
+                //3.获取文字内容
+                    const box2 = document.querySelector('.box2')
+                    console.log(box2.innerText);
+                    box2.innerText = '<strong>我是一个盒子</strong>'   //innerText只是单纯的文本输出，不会解析标签
+                    box2.innerHTML = '<strong>我是一个盒子</strong>'   //innerHTML可文本输出，会解析标签
+                //4.修改属性
+                    // const img = document.querySelector('img')
+                    // img.src = '././images/花木兰.jpg'
+                    // img.title = '花木兰'
+                //5.小案例
+                    const imgArr = ["./images/201809141417401888.jpg","./images/大话西游.jpg","./images/花木兰.jpg"]
+                    const random = Math.floor(Math.random()*imgArr.length)
+                    const img = document.querySelector('img')
+                    img.src = `${imgArr[random]}`
+            
+    </script>
+</body>
+</html>  

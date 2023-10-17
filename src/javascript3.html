@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/css/vue.css">
+</head>
+<body>
+    <script>
+    //函数
+        //函数声明
+            // function sheet99() {
+            //     for (let i = 1; i <= 9; i++) {
+            //         for (let j = 1; j <= i; j++) {
+            //             document.write(`<span>${j} X ${i} = ${i*j}</span>   `)
+            //         }
+            //         document.write('<br>')
+            //     } 
+            // }
+        //函数调用
+            // sheet99()
+            // sheet99()
+
+        //求和例子
+            // function getSum() {
+            //     let sum = 0
+            //     for (let i = 1; i <= 100; i++) {
+            //         sum+=i
+            //     }
+            //     console.log(sum);
+            // }
+            // getSum()
+        
+        //函数传参
+                // function getSum(n) {
+                //     let sum = 0
+                //     for (let i = 1; i <= n; i++) {
+                //         sum+=i
+                //     }
+                //     console.log(sum);
+                // }   
+                // getSum(100)
+                // getSum(10)
+
+                // function getSum(start,end) {  //形参
+                //     let sum = 0
+                //     for (let i = start; i <= end; i++) {
+                //         sum+=i
+                //     }
+                //     console.log(sum);
+                // }   
+                // getSum(1,100)    //实参
+                // getSum(1,10)
+
+                // function getSum(start = 0,end = 0) {  //形参的默认值只会在实参缺少时被执行
+                //     let sum = 0
+                //     for (let i = start; i <= end; i++) {
+                //         sum+=i
+                //     }
+                //     console.log(sum);
+                // }   
+                // getSum(1,100)    //实参
+                // getSum()
+        //数组求和
+                // function getArrSum(arr = []) {   //保证实参是空数组时，不报错
+                //     // console.log(arr);
+                //     let sum  = 0
+                //     for (let i = 0; i < arr.length; i++) {
+                //         sum += arr[i]
+                //     }
+                //     console.log(sum);
+                // }
+                // getArrSum([1,2,3,4,5]) 
+                // getArrSum([])
+        //输入实参求和
+                // function getSum(start,end) {
+                //     let sum = 0
+                //     for (let i = start; i <= end; i++) {
+                //         sum+=i
+                //     }
+                //     console.log(sum);
+                // }
+                // let a = +prompt('开始')
+                // let b = +prompt('结束')
+                // getSum(a,b)    // 实参可以是变量
+        
+        //函数返回值
+                // function fn() {
+                //     return 20
+                // }
+                // fn()   //  相当于执行了  fn() = 20
+                // let re = fn()  //re = 20
+                // console.log(fn());  //20
+
+            //两数最大值
+                // function getMax(x,y) {
+                //     return x>y ? x:y
+                // }
+                // console.log(getMax(1,2));
+            //数组的最大值
+                // function getArrMax(arr) {
+                //     let max = arr[0]
+                //     for (let i = 1; i < arr.length; i++) {
+                //         if (arr[i]>max) {
+                //             max = arr[i]
+                //         }
+                //     }
+                //     return max
+                // }
+                // console.log(getArrMax([2,5,4,9,7,3,10]));
+            //数组的最大值和最小值
+                // function getArrMax(arr) {
+                //     let max = arr[0]
+                //     let min = arr[0]
+                //     for (let i = 1; i < arr.length; i++) {
+                //         if (arr[i]>max) {
+                //             max = arr[i]
+                //         }
+                //         if (arr[i]<min) {
+                //             min = arr[i]
+                //         }
+                //     }
+                //     return [max,min]   //数组可以存多个值
+                    
+                // }
+                // console.log(getArrMax([2,5,4,9,7,3,10]));
+        //1.如果函数名相同，会执行后面的，后面会覆盖前面的
+        //2.参数不匹配问题，实参和形参的个数不一样，会undefined填充（实参的个数小于形参）；如果实参的个数多余形参，那自动忽略多余的实参
+        
+
+        //匿名函数
+            //使用方法：
+                //1.函数表达式
+                    // let fn = function(){}
+                    // fn()
+                    //这种和之前的具名函数的区别是，函数的调用具名函数在哪里都可以调用，函数表达式只能在下面
+                //2.立即执行函数
+                    // //写法1.
+                    //     (function(){
+                    //         let num = 10   //立即执行函数可以防止变量污染
+                    //     })();       //这个分号必须写
+                    //     (function(){
+                    //         let num = 10
+                    //     })();//最后面这个小括号是在调用，不用在其他地方在调用，因为他本身就自己调用了
+                    //     (function(x,y){
+                    //         console.log(x+y);
+                    //     })(1,2);
+                    // //写法2.
+                    //     (function(x,y){
+                    //         console.log(x+y);
+                    //     }(2,3));
+        //逻辑中断
+                // console.log(11 || 22); //输出11，或中，第一个真了就直接输出第一个
+                // console.log(11 && 22); //输出22，与中，两个都真输出第二个
+
+                // function fn(x,y) {
+                //     x = x || 0    //等效替代了实参没有值时，给形参进行赋值
+                //     y = y || 0
+                // }
+                // fn()
+                // fn(1,2)
+
+        //转换Boolean类型
+                // '',0,undefined,null,false,NaN   除了这几个转换之后为假，其余都是真
+        
+        //获取三位数的各个位数
+            // let num = +prompt("输入一个数字")
+            // let c = num%10
+            // let b = ((num-c)/10)%10
+            // let a = (num-c-b*10)/100
+            // document.write(`百位数是${a},${b},${c}`)        
+    
+    </script>
+</body>
+</html>
