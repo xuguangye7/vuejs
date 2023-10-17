@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body{
+            background: url(./images/花木兰.jpg) no-repeat top center/cover;
+        }
         .box{
             width: 200px;
             height: 200px;
@@ -23,7 +26,12 @@
                     box.style.width = '300px'
                     box.style.backgroundColor = 'hotpink'  //属性中具有-的时候采取小驼峰命名
                     box.style.border = '2px solid blue'
+
+                    const imgArr = ["./images/201809141417401888.jpg","./images/大话西游之大圣娶亲.jpg","./images/大话西游.jpg","./images/花木兰.jpg"]
+                    const random = Math.floor(Math.random()*imgArr.length)
+                    document.body.style.backgroundImage = `url(${imgArr[random]} )`
                 //2.操作类名className
+                
                 //3.通过classList
     </script>
 </body>
