@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            background-color: skyblue;
+            margin: 100px auto;
+            padding: 10px;
+        }
+        .nav{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">123</div>
+    <script>
+        //操作元素样式属性
+                //1.通过style属性操作CSS
+                //2.操作类名className
+                const div = document.querySelector('div')
+                div.className = ' nav box'   //这样的话可以保留之前nav的属性
+                
+                //3.通过classList
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="电脑">  
+    <!-- 这样加载默认显示电脑 -->
+
+    <input type="checkbox" class="checkbox"> 
+    <!-- 勾选框 -->
+
+    <button>点击</button>
+    <script>
+        const uname = document.querySelector('input')
+        console.log(uname.value);  //获取表单里面的值只能用  表单.value
+        uname.value = '我要买电脑'  //修改 值
+        uname.type = 'password'  //修改类型
+
+        const ipt = document.querySelector('.checkbox')
+        ipt.checked = true        //这里设置为true，将显示默认打勾
+
+        const but = document.querySelector('button')
+        but.disabled = true   //true 代表禁用，false 代表不禁用
+    </script>
+</body>
+</html>
