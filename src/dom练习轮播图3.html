@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .slider-wrapper {
+            width: 400px;
+            height: 300px;
+            background-color: red;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .active{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="slider-wrapper">
+            <img src="./images/201809141417401888.jpg" alt="">
+        </div>
+        <div class="slider-footer">
+            <p>1</p>
+            <ul class="ulli">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li> 
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const imgArr = [
+            {url:'./images/201809141417401888.jpg',title:"1"},
+            {url:'./images/1.jpg',title:"2"},
+            {url:'./images/大话西游.jpg',title:"3"},
+            {url:'./images/大话西游之大圣娶亲.jpg',title:"4"},
+            {url:'./images/花木兰.jpg',title:"5"},
+            {url:'./images/无双飞将马超.jpg',title:"6"},
+            {url:'./images/星空背景.jpg',title:"7"},
+            {url:'./images/英雄联盟艾希.jpg',title:"8"},
+        ]
+        const img = document.querySelector('.slider-wrapper img')
+        const p = document.querySelector('.slider-footer p')
+        let i = 0;
+        setInterval(function(){
+            i++
+            if (i>=imgArr.length) {
+                i=0
+                
+            }
+            
+            img.src = imgArr[i].url
+            p.innerHTML = imgArr[i].title
+
+            document.querySelector('.ulli .active').classList.remove('active')
+            document.querySelector(`.ulli li:nth-child(${i+1})`).classList.add('active')
+        },1000)
+    </script>
+</body>
+</html>

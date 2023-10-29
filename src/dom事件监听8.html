@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 500px;
+            height: 300px;
+            background-color: red;
+        }
+        .box1{
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+<body>
+    <button>
+        点击
+    </button>
+    <div class="box">
+        我是广告
+        <div class="box1">
+            X
+        </div>
+    </div>
+    <script>
+        //元素对象.addEventListener('事件类型',要执行的函数)
+
+        //1.事件源
+        //2.事件类型
+        //3.事件处理程序
+        /*
+        const btn = document.querySelector('button')
+        btn.addEventListener('click',function () {
+            alert('时间监听~')
+        })
+
+        const box = document.querySelector('.box')
+        const box1 = document.querySelector('.box1')
+        box1.addEventListener('click',function () {
+            box.style.display = 'none'
+        })
+        */
+
+
+        //点击事件         用onclick 也可以进行事件的点击
+        // const btn = document.querySelector('button')
+        // btn.onclick = function () {
+        //     alert(11)
+        // }
+        // btn.onclick = function () {
+        //     alert(22)
+        // }                                //这种写法会进行覆盖，显示22
+
+        const btn = document.querySelector('button')
+        btn.addEventListener('click',function () {
+            alert(11)
+        })
+        btn.addEventListener('click',function () {
+            alert(22)
+        })                             //这种两个都会执行，不会有覆盖的情况
+    </script>
+</body>
+</html>

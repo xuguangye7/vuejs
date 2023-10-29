@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn" disabled>已阅读协议(10)</button>
+    <script>
+        ///开启定时器     setInterval(函数，间隔时间)
+            // setInterval(function(){
+            //     console.log('123');
+            // },1000)
+
+        function fn(){
+            console.log('123');
+        }
+        // setInterval(fn,1000) //这里函数在调用的时候函数名不需要加小括号自动去找这个函数名，然后自己就可以调用；加了小括号，就只进行一次调用
+        // console.log(setInterval(fn,1000));//每次开启定时器，会返回一个数字，
+
+        //关闭定时器的时候，就关闭这个数字就行
+        // let n = setInterval(fn,1000)
+        // console.log(n);
+        // clearInterval(n)
+
+        //小例子
+        const btn = document.querySelector('.btn')
+        let i = 10;
+        let n = setInterval(function(){
+            i--;
+            btn.innerHTML = `已阅读协议(${i})`
+            if(i==0){ 
+                clearInterval(n)
+                btn.disabled = false
+                btn.innerHTML = '同意'
+            }
+        },1000)
+    </script>
+</body>
+</html>
