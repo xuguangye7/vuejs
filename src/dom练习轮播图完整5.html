@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <div>
+    <div class="box">
         <div class="slider-wrapper">
             <img src="./images/201809141417401888.jpg" alt="">
         </div>
@@ -37,6 +37,8 @@
                 <li></li>
             </ul>
         </div>
+        <button class="prex"><</button>
+        <button class="next">></button>
     </div>
     <script>
         const imgArr = [
@@ -51,18 +53,52 @@
         ]
         const img = document.querySelector('.slider-wrapper img')
         const p = document.querySelector('.slider-footer p')
+        const prex = document.querySelector('.prex')
+        const next = document.querySelector('.next')
+        const box = document.querySelector('.box')
         let i = 0;
-        setInterval(function(){
+        //右侧按钮
+        next.addEventListener('click',function () {
             i++
             if (i>=imgArr.length) {
                 i=0
-                
             }
+            toggle()
+        })
+
+        //左侧按钮
+        prex.addEventListener('click',function () {
+            i--
+            if (i<0) {
+                i=7
+            }
+            toggle()
+        })
+
+        //共同的函数，减少代码冗余
+        function toggle() {
             img.src = imgArr[i].url
             p.innerHTML = imgArr[i].title
             document.querySelector('.ulli .active').classList.remove('active')
             document.querySelector(`.ulli li:nth-child(${i+1})`).classList.add('active')
-        },1000)
+        }
+
+        //开启定时器：因为定时器代码和右侧按钮一样，这里自动调用点击事件
+        let n = setInterval(function(){
+            next.click()
+        },1000)    
+        
+
+        //鼠标划入划出 开关定时器
+        box.addEventListener('mouseenter',function (){
+            clearInterval(n)
+        })
+        box.addEventListener('mouseleave',function (){
+            clearInterval(n)
+            n = setInterval(function(){
+                next.click()
+            },1000) 
+        })
     </script>
 </body>
 </html>

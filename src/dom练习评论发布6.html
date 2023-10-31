@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper textarea{
+            height: 20px;
+            transition: all 0.5s;
+        }
+        .wrapper textarea:focus{
+            height: 40px;
+        }
+        .wrapper .total {
+            opacity: 0;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <textarea id="tx" cols="30" rows="2" placeholder="发一条友善的评论"></textarea>
+        <button>发布</button>
+    </div>
+    <div class="wrapper">
+        <span class="total">0/200字</span>
+    </div>
+    <script>
+        const tx =document.querySelector('#tx')
+        const total = document.querySelector('.total')
+        //1.显示
+        tx.addEventListener('focus',function (){
+            total.style.opacity = 1
+        })
+        //2.隐藏
+        tx.addEventListener('blur',function (){
+            total.style.opacity = 0
+        })
+        //3.检测用户输入
+        tx.addEventListener('input',function () {
+            // console.log(tx.value.length);
+            total.innerHTML = `${tx.value.length}/200`
+        })
+    </script>
+</body>
+</html>

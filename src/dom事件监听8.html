@@ -62,6 +62,15 @@
         btn.addEventListener('click',function () {
             alert(22)
         })                             //这种两个都会执行，不会有覆盖的情况     所以还是用下面的这种
+
+        //鼠标经过，鼠标离开
+        const box = document.querySelector('.box')
+        box.addEventListener('mouseenter',function (){
+            console.log("来了");
+        })
+        box.addEventListener('mouseleave',function (){
+            console.log("zou了");
+        })
     </script>
 </body>
 </html>
