@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab-content .item{
+            display: none;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+        .tab-content .item.active{
+            display: block;
+        }
+        ul li{
+            color:#000;
+        }
+        ul li .active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="tab-nav">
+            <ul>
+                <li><a class="active" href="">精选</a></li>
+                <li><a href="">美食</a></li>
+                <li><a href="">百货</a></li>
+                <li><a href="">个护</a></li>
+                <li><a href="">预告</a></li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="item active">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+        </div>
+    </div>
+    <script>
+        //1.a绑定鼠标经过
+        const as = document.querySelectorAll('.tab-nav a')
+        for (let i = 0; i < as.length; i++) {
+            as[i].addEventListener('mouseenter',function () {
+                document.querySelector('.tab-nav .active').classList.remove('active')
+                this.classList.add('active')        //这里的this其实就是as[i]
+
+                //显示下面的
+                document.querySelector('.tab-content .active').classList.remove('active')
+                document.querySelector(`.tab-content .item:nth-child(${i+1})`).classList.add('active')
+            })
+            
+        }
+    </script>
+</body>  
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <tr>
+        <th class="allCheck">
+            <input type="checkbox" id = "checkAll">
+            <span>全选</span>
+        </th>
+        <th>商品</th>
+        <th>商家</th>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="check" class="ck">
+        </td>
+        <td>123456</td>
+        <td>xiaomo</td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="check" class="ck">
+        </td>
+        <td>654321</td>
+        <td>xiaomi</td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="check" class="ck">
+        </td>
+        <td>789520</td>
+        <td>小米</td>
+    </tr>
+    <script>
+        //先获取
+        const checkAll = document.querySelector('#checkAll')
+        const cks = document.querySelectorAll('.ck')
+
+        //点击大复选框，注册事件
+        checkAll.addEventListener('click',function () {
+            //得到此时的选中状态，checked属性
+            //遍历所有的小复选框，让他们的checked和大的相同就行了
+            for (let i = 0; i < cks.length; i++) {
+                cks[i].checked = checkAll.checked   //实现全选全都选，全不选就全都不选
+            }
+        })
+
+        //小复选框控制大复选框
+        for (let i = 0; i < cks.length; i++) {
+            cks[i].addEventListener('click',function (){
+                //使用伪类选择器，得到目前已经选中的小复选框的个数
+                // console.log(document.querySelectorAll('.ck:checked').length);
+
+                /*
+                if (document.querySelectorAll('.ck:checked').length == cks.length) {
+                    checkAll.checked = true
+                }
+                else{
+                    checkAll.checked = false
+                }
+                */
+                //上面这块可以用一句来实现
+                checkAll.checked = document.querySelectorAll('.ck:checked').length === cks.length
+            })
+            
+        }
+    </script>
+</body>
+</html>
