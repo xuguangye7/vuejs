@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father{
+            width: 500px;
+            height: 500px;
+            background-color: red;
+        }
+        .son{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- 事件流是指事件完整执行过程中的流动路径 
+        分为   捕获和冒泡   两个阶段    
+    -->
+    <div class="father">
+        <div class="son">
+
+        </div>
+    </div>
+    <script>
+        const father = document.querySelector('.father')
+        const son = document.querySelector('.son')
+        /*
+            DOM.addEventListener(事件类型,事件处理函数,是否使用捕获机制)
+            在之前中第三个参数默认是false,默认冒泡,从小到大 
+            添加上true之后，就是捕获机制，从大的往小的找
+        */
+
+        //下面是捕获
+        // document.addEventListener('click',function () {
+        //     alert('我是爷爷')
+        // },true)
+        // father.addEventListener('click',function () {
+        //     alert('我是爸爸')
+        // },true)
+        // son.addEventListener('click',function () {
+        //     alert('我是儿子')
+        // },true) 
+        
+
+        //下面是冒泡
+        document.addEventListener('click',function () {
+            alert('我是爷爷')
+        })
+        father.addEventListener('click',function () {
+            alert('我是爸爸')
+        })
+        son.addEventListener('click',function (e) {
+            alert('我是儿子')
+            e.stopPropagation()         //这个是阻止事件流的，冒泡和捕获都可以阻止
+            //但是一定要借助事件对象
+        })
+        //冒泡是默认的，所以很容易影响到父级元素，产生阻止冒泡
+
+
+
+
+        //mouseover和mouseout 会有冒泡效果
+        //mouseenter和mouseleave 没有冒泡效果（推荐）
+        
+        // father.addEventListener('mouseover',function () {
+        //     console.log('鼠标经过');
+        // })
+        // father.addEventListener('mouseout',function () {
+        //     console.log('鼠标离开');
+        // })
+
+        father.addEventListener('mouseenter',function () {
+            console.log('鼠标经过');
+        })
+        father.addEventListener('mouseleave',function () {
+            console.log('鼠标离开');
+        })
+
+    </script>
+</body>
+</html>

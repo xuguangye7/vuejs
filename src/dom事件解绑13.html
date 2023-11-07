@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击</button>
+    <script>
+        const btn = document.querySelector('button')
+
+        //1.
+        // btn.onclick = function () {
+        //     alert('点击了')
+        //     //L0事件解绑
+        //     btn.onclick = null
+        // }
+        
+        //2.
+        function fn() {
+            alert('点击了！')
+        }
+        btn.addEventListener('click',fn)
+        //L2事件移除   (事件类型，函数名称，)，就不能使用匿名函数了
+        btn.removeEventListener('click',fn)
+    </script>
+</body>
+</html>

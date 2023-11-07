@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab-content .item{
+            display: none;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+        .tab-content .item.active{
+            display: block;
+        }
+        ul li{
+            color:#000;
+        }
+        ul li .active{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="tab-navs">
+            <ul>
+                <li><a class="active" data-id="0">精选</a></li>
+                <li><a data-id="1">美食</a></li>
+                <li><a data-id="2">百货</a></li>
+                <li><a data-id="3">个护</a></li>
+                <li><a data-id="4">预告</a></li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="item active">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+        </div>
+    </div>
+    <script>
+        //事件委托，就是获取ul
+        const ull = document.querySelector('.tab-navs ul')
+        const items = document.querySelectorAll('.tab-content .item')
+        ull.addEventListener('click',function (e) {
+            // console.log(e.target.nodeName);  //获取所点击的元素类型名称
+            if (e.target.nodeName === 'A') {
+                document.querySelector('.tab-navs .active').classList.remove('active')
+                e.target.classList.add('active')
+                
+                //下面大盒子的部分
+                console.log(e.target.dataset.id);    //获取索引号   使用的自定义属性
+                let i =  +e.target.dataset.id    //这里获取的id是一个字符串类型，不进行类型转换在下面的计算会出错
+                console.log(typeof(i));
+                //去除
+                document.querySelector('.tab-content .active').classList.remove('active')
+                //加新的两种方法
+                //1.
+                // document.querySelector(`.tab-content .item:nth-child(${i+1})`).classList.add('active')
+                //2.
+                items[i].classList.add('active')
+            }
+        })
+
+    </script>
+</body>  
+</html>
