@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+    <!-- // 1.没有块级作用域引起的问题：for的块级 -->
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>   
+        <button>按钮4</button>
+        <button>按钮5</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // <!-- ES6补充 -->
+            // <!-- 块级作用域 -->
+                // 1.变量作用域：变量在什么范围内起作用
+                    // {
+                    //     var name = 'why';
+                    //     console.log(name);
+                    // }
+                    // console.log(name);  //这里也能打印，就说明var没有块级作用域
+                // 2.没有块级作用域引起的问题：if的块级
+                    var func;
+                    if(true){
+                        var name = 'why';
+                        func = function () {
+                            console.log(name);
+                        }
+                    }//这是一个整体，功能是打印why
+
+                    // name = 'kobe'     但这里给改掉了
+
+                    func() // 正常情况下我这里是想对name,why进行打印，但是在上面过程中name进行更改了，why就打印不出来了
+
+                // 3.没有块级作用域引起的问题：for的块级
+                    var btns = document.getElementsByTagName('button');
+                    for (var i = 0; i < btns.length; i++) {
+                        btns[i].addEventListener('click',function(){
+                            console.log(i+'被点击');  //这里不管点击那个按钮，都是显示5被点击
+                        })
+                    }
+                    //下面闭包可以解决，因为函数是一个作用域
+                    var btns = document.getElementsByTagName('button');
+                    for (var i = 0; i < btns.length; i++) {
+                        (function (num) {
+                            btns[i].addEventListener('click',function(){
+                                console.log(num+'被点击');  
+                            })
+                        })(i)
+                    }
+
+            //对象字面量的增强写法
+                // 1.字面量概念
+                    // const obj = {
+                    //     name:'why',
+                    //     age:18,
+                    //     eat:function(){
+                    //         console.log('吃东西');
+                    //     }
+                    // }
+                // 2.属性的增强写法
+                    const name = 'why';
+                    const age = 18;
+                    const height = 1.88;
+                    //已经有已定义好的数据
+
+                    // ES5写法
+                    // const obj = {
+                    //     name:name,
+                    //     age:age,
+                    //     height:height
+                    // }
+
+                    //ES6写法
+                    const obj = {
+                        name,
+                        age,
+                        height
+                    }
+                    console.log(obj);
+                //3.函数的增强写法
+                    // ES5写法
+                    // const obj = {
+                    //     eat:function(){
+                    //         console.log('吃东西');
+                    //     },
+                    //     run:function(){
+                    //         console.log('跑步');
+                    //     }
+                    // }
+
+                    //ES6写法
+                    const obj1 ={
+                        run(){
+                            console.log('吃东西');
+                        },
+                        eat(){
+                            console.log('跑步');
+                        }
+                    }
+                    console.log(obj1);
+    </script>
+</body>
+</html>

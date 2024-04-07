@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 3.组件的使用 -->
+        <my-cpn></my-cpn>
+        <my-cpn></my-cpn>
+    </div>
+    <my-cpn></my-cpn><!-- 这个是渲染不出来的，因为只有在vue实例中才能被渲染出来 -->
+
+    <div id="app2">
+        <!-- 这里是有两个vue实例的，全局组件是都可以渲染出来的；但是app实例中注册的局部组件就不会进行解析 -->
+        <my-cpn></my-cpn>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // 1. 创建组件构造器对象
+        const cpnC = Vue.extend({
+            // 模板
+            template: `
+                <div>
+                    <h2>我是标题</h2>
+                    <p>123456</p>
+                    <p>点三公分</p>
+                </div>`
+        })
+        // 2.注册组件(这种注册方法得到的就是全局组件，意味着它可以在多个vue的实例下面使用)
+        // Vue.component('my-cpn',cpnC)
+
+        const app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            components:{//这种注册方法得到的就是局部组件，在某个实例下进行注册
+                'my-cpn': cpnC
+            }
+        })
+        const app2 = new Vue({
+            el:'#app2',
+        })
+    </script>
+</body>
+</html>

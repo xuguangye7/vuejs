@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+    <!-- 计数器小案例 -->
+        <h2>{{counter}}</h2>
+        <!-- 1.第一种不用在下面写函数 -->
+        <!-- <button @click="counter++">+</button>
+        <button @click="counter--">-</button> -->
+        <!-- 2.第二种在下面写函数 -->
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+
+    <!-- 小括号加不加的问题 -->
+        <!-- 首先监听事件，然后调用的方法没有参数，()可以省略 -->
+        <button @click="btn1()">按钮1</button>
+        <button @click="btn1">按钮1</button>
+
+        <!-- 函数中有形参，但是()中没有实参，输出undefined (第二种)-->
+        <button @click="btn2(123)">按钮2</button>
+        <button @click="btn2()">按钮2</button>
+        <!-- 这种情况小括号都没有，但是函数有形参，Vue会默认将浏览器生成的event事件对象作为参数传入到方法中 -->
+        <button @click="btn2">按钮2</button>
+
+        <!-- 方法定义时，我们需要event对象，同时有需要其他参数 -->
+        <!-- 1.如果没括号，和上面一样，浏览器生成的event事件对象作为第一个参数传入到方法中，第二个参数是undefined -->
+        <button @click="btn3">按钮3</button>
+        <!-- 想要手动获取到浏览器参数的event对象：$event -->
+        <button @click="btn3(123,$event)">按钮3</button>
+
+    <!-- v-on修饰符 -->
+        <!-- 1.   .stop 修饰符 -->
+            <div @click="divClick">
+                aaaaa
+                <button @click.stop="btnClick">按钮</button>
+            </div>
+            <!-- 按钮中如果不加.stop，点击按钮会冒泡，将div也打印，加上就阻止冒泡了 -->
+
+        <!-- 2.   .prevent 修饰符  ：阻止默认事件的发生-->
+            <br>
+            <form action="baidu">
+                <input type="submit" value="提交" @click="subClick">
+                <input type="submit" value="提交" @click.prevent="subClick">
+            </form>
+
+        <!-- 3. 监听某个键盘中某个键帽 -->
+            <br>
+            <input type="text" @keyup.enter="keyUp">
+        
+        <!-- 4. 只触发一次回调-->
+            <br>
+            <button @click.once="onceClick">按钮8</button>
+
+    <!-- v-if和v-else -->
+        <h2 v-if="isShow">123</h2>
+        <h2 v-else>456</h2>
+    <!-- v-if和v-eles-if和v-else     v-else后面是不加条件的 -->
+        <!-- <h2 v-if="score>=90">优秀</h2>
+        <h2 v-else-if="score>=60">良好</h2>
+        <h2 v-else>不及格</h2> -->
+        <!-- 上面逻辑太麻烦，一般不从这里写，可以从computed中写 -->
+        <h1>{{result}}</h1>
+
+    <!-- 登录切换案例 -->
+        <span v-if="isUser">
+            <label for="username">用户账号</label>
+            <input type="text" id="username" placeholder="用户账号" key="username">
+            <!-- 这里label中的for和input中的id值一样，将两个组件进行相关联，点击文字，输入框获得焦点 -->
+        </span>
+        <span v-else>
+            <label for="email">用户邮箱</label>
+            <input type="text" id="email" placeholder="用户邮箱" key="email">
+            <!-- 这里label中的for和input中的id值一样，将两个组件进行相关联，点击文字，输入框获得焦点 -->
+        </span>
+        <button @click="isUser=!isUser">切换</button>
+
+        <!-- 虚拟dom：
+            代码渲染到浏览器上时，有一个中间过程，就是虚拟dom，账号这个label和input进行渲染，然后更新为邮箱的时候，
+            不会再次进行这两个标签的渲染，而是还用之前账号的，只不过就是修改了一些值，
+            从而账号中输入的东西，切换为邮箱，输入框中的值不变，加上key就行了
+
+            老师解释：Vue在进行DOM渲染时，出于性能的考虑，会尽可能的复用已经存在的元素，而不是重新创建新的元素
+            在上面的案例中，Vue内部会发现原来的input元素不再使用，直接作为else中的input来使用了
+        -->
+
+    <!-- v-for 遍历数组与对象 -->
+        <ul>
+            <li v-for="(item,index) in names">{{index+1}},{{item}}</li>
+        </ul>
+        <ul>  
+            <li v-for="(value,key,index) in info">{{value}}-{{key}}-{{index}}</li>
+            <!-- 在遍历对象的时候，前面是value，后面是属性名，在后面是index -->
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                counter:0,
+                isShow:true,
+                score:98,
+                isUser:true,
+                names:['james','jurry','liming'],
+                info:{
+                    name:'codewhy',
+                    age:18,
+                    height:1.88
+                }
+            },
+            methods:{
+                //ES6增强写法
+                increment(){
+                    this.counter++
+                },
+                decrement(){
+                    this.counter--
+                },
+                btn1(){
+                    console.log('btn1');
+                },
+                btn2(event){
+                    console.log('------',event);
+                },
+                btn3(abc,event){
+                    console.log('++++++++',abc,event);
+                },
+                divClick(){
+                    console.log('div');
+                },
+                btnClick(){
+                    console.log('btn');
+                },
+                subClick(){
+                    console.log('sub');
+                },
+                keyUp(){
+                    console.log('keyUp');
+                },
+                onceClick(){
+                    console.log('onceClick');
+                },
+                
+            },
+            computed:{
+                result(){
+                    let showMessage = '';
+                    if(this.score>=90){
+                        showMessage = '优秀'
+                    }else if(this.score>=60){
+                        showMessage = '良好'
+                    }else{
+                        showMessage = '不及格'
+                    }
+                    return showMessage
+                }
+            }
+        })
+    </script>
+</body>
+</html>

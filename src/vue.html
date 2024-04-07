@@ -82,6 +82,8 @@
         <!-- title属性就是鼠标悬停可以显示图片的title -->
         <br>
         <img :src="imgSrc" alt="" :title="imgTitle+'!!!'"  :class="{active:isActive}" @click="toggleActive">  
+        <!-- 这里属性值可以作为对象放在methods中，通过函数来调用 -->
+        <img :src="imgSrc" alt="" :title="imgTitle+'!!!'"  :class="getClasses()" @click="toggleActive">  
         
 
         <br>
@@ -142,6 +144,10 @@
                 vegetables:[{name:"一二三四五"},{name:"五四三二一"}],
             },
             methods:{
+              getClasses:function () {
+                return {active:this.isActive}
+              },
+              
               doIt:function(){
                 alert("做It");
               },

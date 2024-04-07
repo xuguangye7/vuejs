@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"> 
+        <!-- v-model实现data与input输入框的双向绑定 -->
+        <input type="text" v-model="message">
+        <!-- 上面的双向绑定实际是下面的：先将message通过:value绑定上，再通过事件将输入的值改给message -->
+        <!-- <input type="text" :value="message" @input="message = $event.target.value"> -->
+        {{message}}
+        <br>
+
+        <!-- 1.radio是单选框，用name值相同这两个就只能选一个 -->
+        <label for="male">
+            <input type="radio" id="male" name="sex" value="男" v-model="sex"> 男
+        </label>
+        <label for="female">
+            <input type="radio" id="female" name="sex" value="女" v-model="sex"> 女
+        </label>
+        <!-- name和v-model的值一样，name就可以省略了，v-model就可以实现两个只能选一个 -->
+        <br>
+        {{sex}}
+        <br>
+
+        <!-- 2. checkbox  复选框（单个复选框和多个复选框） -->
+        <label for="agree">
+            <input type="checkbox" id="agree" v-model="isAgree"> 同意协议
+            <!-- 这里的for和id的值一样，就是可以让这两个绑定在一块，点击文字也可以获取焦点
+                v-model的意思就是想着后台能获取到值
+            -->
+        </label>
+        {{isAgree}}
+        <button :disabled="!isAgree">下一步</button>
+        <br>
+
+        <!-- 多个复选框，对应的是数组 -->
+        <input type="checkbox" value="篮球" v-model="hobbies">篮球
+        <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+        <input type="checkbox" value="足球" v-model="hobbies">足球
+        <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+        {{hobbies}}
+        <br>
+
+        <!-- 3. select 和checkbox差不多 -->
+            <!-- 选一个  -->
+            <select name="abc" id="" v-model="fruit">
+                <option value="苹果">苹果</option>
+                <option value="葡萄">葡萄</option>
+                <option value="香蕉">香蕉</option>
+            </select>
+            {{fruit}}
+
+            <!-- 选多个  -->
+            <select name="abc" id="" v-model="fruits" multiple>
+                <option value="苹果">苹果</option>
+                <option value="葡萄">葡萄</option>
+                <option value="香蕉">香蕉</option>
+            </select>
+            {{fruits}}
+
+        <!-- 4. 值绑定 -->
+        <!-- input的值是在数组中的，通过:value动态的给value绑定值 -->
+        <label v-for="item in originHobbies" :for="item">
+            <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
+        </label>
+        <br>
+
+        <!-- v-model 修饰符的使用 -->
+            <!-- 1.lazy -->
+            <!-- 现在这种情况已经双向绑定，但是太过于频繁，lazy可以让数据在失去焦点或者回车时在进行数据的更新 -->
+            <input type="text" v-model.lazy="message">
+            {{message}}
+            <br>
+
+            <!-- 2.number -->
+            <!-- 想在输入框中输入数字， 并且最终得到的结果还是数字类型-->
+            <!-- <input type="number" v-model="age"> -->
+            <!-- 上面现在这种情况最初根据数据的定义是number，可是一输入就变成string -->
+            <input type="number" v-model.number="age">
+            {{age}}--{{typeof age}}
+            <br>
+
+            <!-- 3.trim -->
+            <!-- 去除字符串左右两边的空格 -->
+            <input type="text" v-model.trim="message">
+            {{message}}
+            <br>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message:'你好啊',
+                sex:'男',  // 刷新默认值 
+                isAgree: false,  //checkbox单选框对应的是Boolean
+                hobbies:[],      //checkbox多选框对应的就是数组
+                fruit:'香蕉',
+                fruits: [],
+                originHobbies: ['篮球','足球','羽毛球','乒乓球','台球'],
+                age: 0
+            }
+        })
+    </script>
+</body>
+</html>

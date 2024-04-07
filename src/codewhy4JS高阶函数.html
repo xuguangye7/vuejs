@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // filter/map/reduce高阶函数的用法
+
+        const nums = [10,20,111,222,444,40,50]
+
+        //1.这是之前最常规的方法
+            // 1. 需求：取出所有小于100的数字
+            // let newNums = []
+            // for(let n of nums){
+            //     if(n < 100){
+            //         newNums.push(n)
+            //     }
+            // }
+
+            // 2.需求：将所有小于100的数字*2
+            // let new2Nums = []
+            // for(let n of newNums){
+            //     new2Nums.push(n*2)
+            // }
+
+            // 3.需求：将所有new2News数字相加，得到最终结果
+            // let total = 0
+            // for(let n of new2Nums){
+            //     total += n
+            // }
+            // console.log(total);
+
+        //2. 引入filter/map/reduce之后的写法
+            //1.filter中回调函数有一个要求：必须返回一个布尔值
+                // true时，函数内部会自动将这次回调的n加入到新的数组中
+                // false时，函数内部会自动过滤掉这次的n
+                // let newNums = nums.filter(function (n) {
+                //     return n < 100
+                // })
+
+            // 2.map中回调函数也是将返回值加入到新的数组中
+                // let new2Nums = newNums.map(function(n){
+                //     return n * 2
+                // })
+            // 3.reduce作用：就是将数组中所有的内容进行汇总（乘加等等）
+                // let total = new2Nums.reduce(function (preValue, n) {
+                //     return preValue + n
+                // },0)
+                // console.log(total);
+                // 针对当前这个例子，n 的取值是20.40.80.100
+                // preValue 第一次取值，是reduce的第二个参数0，之后的取值都是上一次的返回值preValue + n
+                // 第一次：preValue 0   n 20
+                // 第二次：preValue 20  n 40
+                // 第三次：preValue 60  n 80
+                // 第四次：preValue 140 n 100
+                // 最后的和240返回给total
+
+        //3. 整合的写法
+            let total = nums.filter(function(n){
+                return n < 100
+            }).map(function(n){
+                return n*2
+            }).reduce(function(preValue,n){
+                return preValue + n
+            },0)
+            console.log(total);
+
+        //4. 箭头函数的写法
+            // let total = nums.filter(n => n < 100).map(n => n * 2).reduce((pre,n) => pre + n)
+            // console.log(total);
+    </script>
+</body>
+</html>

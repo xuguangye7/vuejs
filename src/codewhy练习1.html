@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li :class="{active:index===currentIndex}" @click="toggleActive(index)" v-for="(item,index) in movies">{{item}}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                movies:['123','234','345','456'],
+                currentIndex:0  //绑定当前选定的元素ID
+            },
+            methods:{
+                toggleActive(p){
+                    this.currentIndex = p
+                }
+            },
+        })
+    </script>
+</body>
+</html>

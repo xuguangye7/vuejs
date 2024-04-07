@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/codewhy2.css">
+</head>
+<body>
+    <div id="app">
+        <div v-if="books.length">
+            <table>
+                <thead>
+                    <th></th>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                    <!-- <tr v-for="item in books">
+                        <td v-for="value in item">{{value}}</td>
+                    </tr>这样是可以实现数据渲染的 -->
+                    <tr v-for="(item,index) in books">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.data}}</td>
+                        <!-- <td>{{'￥'+item.price.toFixed(2)}}</td> -->
+                        <!-- 想实现上述的效果，引入过滤器 -->
+                        <!-- <td>{{item.price | 过滤器}}</td> 
+                        前面item.price会作为一个参数传入过滤器函数中-->
+                        <td>{{item.price | showPrice}}</td>
+                        <td>
+                            <button @click="decrement(index)" :disabled="item.count<=1">-</button>
+                            {{item.count}}
+                            <button @click="increment(index)">+</button>
+                        </td>
+                        <td>
+                            <button @click="removeHandle(index)">移除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>总价格：{{totalPrice | showPrice}}</h2>
+        </div>
+        <h2 v-else>购物车为空</h2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/codewhy2.js"></script>
+</body>
+</html>

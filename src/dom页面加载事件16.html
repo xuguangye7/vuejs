@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 300px;
+            margin: 300px;
+            height: 3000px;
+        }
+        div {
+            position: fixed;
+            display: none;
+            /* margin: 100px; */
+            /* padding:200px; */
+            overflow: scroll;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    
+</head>
+<body>
+    <button>点击</button>
+    <div>
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+        我里面有很多字
+    </div>
+
+
+    <script>
+        //1.页面加载事件
+            //等待页面所有资源全部加载完毕之后，回去执行回调函数
+            // window.addEventListener('load',function () {
+            //     const btn = document.querySelector('button')
+            //     btn.addEventListener('click',function () {
+            //         alert(11)
+            //     })
+            // })
+
+            //这个无需等待全部加载完毕
+            document.addEventListener('DOMContentLoaded',function () {
+
+                const btn = document.querySelector('button')
+                btn.addEventListener('click',function () {
+                    alert(11)
+                })
+            })
+        //2.页面滚动事件
+            const div = document.querySelector('div')
+            window.addEventListener('scroll',function () {
+                // console.log("滚了");
+                //让整个页面滚动，为其添加事件，对象是html
+                //获取html的方法
+                // document.documentElement
+
+                //scrollTop可读写，就是可进行赋值
+                // console.log(document.documentElement.scrollTop);
+                let n = document.documentElement.scrollTop
+                if (n>=200) {
+                    div.style.display = 'block'
+                }
+                else{
+                    div.style.display = 'none'
+                }    
+            })
+            // const div = document.querySelector('div')
+            // div.addEventListener('scroll',function (){
+            //     console.log(111);
+            //     console.log(div.scrollTop);  //被卷去的头部长度
+            // })
+        //3.页面尺寸事件
+                //resize浏览器页面窗口发生变化的时候触发
+                
+            window.addEventListener('resize',function () {
+                console.log(1);
+                console.log(div.clientWidth); //这是可视宽度
+            })
+            
+    </script>
+</body>
+</html>

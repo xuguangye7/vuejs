@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 3.组件的使用 -->
+        <my-cpn></my-cpn>
+        <my-cpn></my-cpn>
+        <cpn2></cpn2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // 1. 创建组件构造器对象
+        // const cpnC = Vue.extend({
+            // 模板
+        //     template: `
+        //         <div>
+        //             <h2>我是标题</h2>
+        //             <p>123456</p>
+        //             <p>点三公分</p>
+        //         </div>`
+        // })
+        // 2.注册组件
+        // 后面两个参数，一个是组件名就是接下来使用的时候用到的，一个是创建的时候使用的名字
+        // Vue.component('my-cpn',cpnC)
+
+        //语法糖
+        //注册全局组件语法糖，上面1和2可以直接写成下面的样子，就没有extend
+        Vue.component('my-cpn',{
+            template: `
+                <div>
+                    <h2>我是标题</h2>
+                    <p>123456</p>
+                    <p>点三公分</p>
+                </div>`
+        })
+
+
+
+        const app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            //注册局部组件的语法糖，省略了extend
+            components:{
+                'cpn2':{
+                    template: `
+                        <div>
+                            <h2>我是标题2</h2>
+                            <p>123456</p>
+                            <p>点三公分</p>
+                        </div>`
+                }
+            }
+        })
+    </script>
+</body>
+</html>
