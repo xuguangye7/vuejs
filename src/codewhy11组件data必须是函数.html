@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 在这里解释为什么data必须是一个函数，因为在多次使用组件的时候，每个组件都会有自己的数据，然而这些数据不能再各个组件中相互影响，
+        所以函数就解决了这个问题，每使用一个组件，都是返回一个新的data，不受其他组件的影响 -->
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+    </div>
+
+    <!-- 模板 -->
+    <template id="cpn">
+        <div>
+            <h2>计数器：{{counter}}</h2>
+            <button @click="increment">+</button>
+            <button @click="decrement">-</button>
+        </div>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //1. 注册组件
+        // const obj = {
+        //     counter:0
+        // }
+        Vue.component('cpn',{
+            template:'#cpn',
+            data(){
+                // return obj   如果是这样写，就会出现各个组件共用一套数据的情况，
+                return {
+                    counter:0
+                }
+            },
+            methods:{
+                increment(){
+                    this.counter++
+                },
+                decrement(){
+                    this.counter--
+                }
+            }
+        })
+        const app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 在这里要将属性传入 -->
+        <!-- 在这里传入的时候不支持驼峰命名，比如是cMovies，是会出错的，可以使用c-movies来传入 -->
+        <cpn :cmovies="movies" :cmessage="message"></cpn>
+    </div>
+
+
+    <!-- 这里在写模板的时候，直接使用实例中的数据是使用不了的，所以下面加props -->
+    <template id="cpn">
+        <div>
+            <ul>
+                <li v-for="item in cmovies">{{item}}</li>
+            </ul>
+            <h2>{{cmessage}}</h2>
+        </div>
+    </template> 
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                movies:['海王','海贼王','海尔兄弟'],
+                message:'你好呀'
+            },
+            components:{
+                cpn:{
+                    template: '#cpn',
+                    //props的写法有很多种
+                    // props:['cmovies','cmessage']//这里就是给起个名
+                    props:{
+                        //1.类型的限制
+                        // cmovies:Array,
+                        // cmessage:String,
+
+                        //2.提供一些默认值
+                        cmessage:{
+                            type:String,
+                            default:'aaaaaaa',//这个就是cmessage在没有传入的时候默认显示这个
+                            required:true,//这个是这个值必须要在上面传入的，不传就会报错
+                        },
+                        cmovies:{
+                            //这里类型是数组或者对象的时候，default默认值必须是一个函数
+                            type:Array,
+                            default(){
+                                return []
+                            }
+                        }
+                    }
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

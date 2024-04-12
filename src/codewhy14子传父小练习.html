@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 父组件模板 -->
+    <div id="app">
+        <cpn @incre="changeTotal" @decre="changeTotal"></cpn>
+        <h2>总次数：{{total}}</h2>
+    </div>
+
+    <!-- 子组件模板 -->
+    <template id="cpn">
+        <div>
+            <button @click="increment">+1</button>
+            <button @click="decrement">-1</button>
+        </div>
+    </template> 
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //父组件
+        const app = new Vue({
+            el:"#app",
+            data:{
+                total:0
+            },
+            methods:{
+                changeTotal(counter){
+                    this.total = counter
+                }
+            },
+            components:{
+                //子组件部分
+                cpn:{
+                    template:'#cpn',
+                    data(){
+                        return{
+                            counter:0,
+                        }
+                    },
+                    methods:{
+                        increment(){
+                            this.counter++;
+                            this.$emit('incre',this.counter)
+                        },
+                        decrement(){
+                            this.counter--;
+                            this.$emit('decre',this.counter)
+                        }
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>
